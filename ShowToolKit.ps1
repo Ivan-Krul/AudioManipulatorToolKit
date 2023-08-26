@@ -1,18 +1,18 @@
-# Get all files in the target directory
-$files = Get-ChildItem -File
+$scriptFiles = Get-ChildItem . -Filter "*.ps1"
 
-# Initialize an empty array to store the filenames with at least one capitalized character
-$filenamesWithCapital = @()
+$capitalScripts = @()
 
-# Loop through each file and check if its name has at least one capitalized character
-foreach ($file in $files) {
-    $originalName = $file.Name
-
-    # Check if the filename contains at least one uppercase character
-    if ($originalName -cmatch "[A-Z]") {
-        $filenamesWithCapital += $originalName
+foreach ($file in $scriptFiles) {
+    if ($file.BaseName -cmatch "[A-Z]") {
+        $capitalScripts += $file.Name
     }
 }
 
-# Display the filenames with at least one capitalized character
-$filenamesWithCapital
+if ($capitalScripts.Count -gt 0) {
+    Write-Host "PowerShell script names containing capital letters:"
+    foreach ($script in $capitalScripts) {
+        Write-Host $script
+    }
+} else {
+    Write-Host "No PowerShell script names containing capital letters found."
+}

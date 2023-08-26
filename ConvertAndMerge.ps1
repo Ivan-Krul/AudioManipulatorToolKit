@@ -19,8 +19,6 @@ Rename-Item -Path "$($filename2)" -NewName "file2$($format)"
 
 ./convert_audio_to_mp3_unfriendly.ps1 -format $format -Wait
 
-
-Write-Host "Calling merge_two_audio_files_unfriendly.ps1 with resName: $($resName)"
 ./merge_two_audio_files_unfriendly.ps1 -resName "$($resName)"
 
 ./CleanFileEnviroument.ps1
